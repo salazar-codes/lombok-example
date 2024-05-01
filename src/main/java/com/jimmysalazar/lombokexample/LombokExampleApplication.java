@@ -1,5 +1,6 @@
 package com.jimmysalazar.lombokexample;
 
+import com.jimmysalazar.lombokexample.model.TwitterAccount;
 import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,12 @@ public class LombokExampleApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LombokExampleApplication.class, args);
+	}
 
-		valAndVar();
+	public static void nonNull() {
+		// TwitterAccount account = new TwitterAccount("salazar.codes");
+		TwitterAccount account = new TwitterAccount(null);
+		log.info("Account {}",account);
 	}
 
 	public static void valAndVar() {
