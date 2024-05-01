@@ -1,11 +1,15 @@
 package com.jimmysalazar.lombokexample;
 
 import com.jimmysalazar.lombokexample.model.TwitterAccount;
+import com.jimmysalazar.lombokexample.service.FileManager;
+import lombok.Cleanup;
 import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.io.IOException;
 
 @SpringBootApplication
 public class LombokExampleApplication {
@@ -14,6 +18,8 @@ public class LombokExampleApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LombokExampleApplication.class, args);
+
+
 	}
 
 	public static void nonNull() {
@@ -36,5 +42,22 @@ public class LombokExampleApplication {
 
 		profile = "Azure developer"; // Permite modificar el valor, más no el tipo
 		log.info("Profile: {} of type {}", profile, profile.getClass().getName());
+	}
+
+	public static void cleanUpExample() throws IOException {
+		/*
+		// try-with-resources llama automaticamente al close
+		try (FileManager writer = new FileManager();) {
+			writer.write("Good morning!","example.txt");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		*/
+
+		//Con Lombok
+		//@Cleanup
+		@Cleanup("releaseResources")
+		FileManager writer = new FileManager();
+		writer.write("Good morning!","example.txt");
 	}
 }
