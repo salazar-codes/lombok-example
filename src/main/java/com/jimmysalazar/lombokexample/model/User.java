@@ -1,15 +1,15 @@
 package com.jimmysalazar.lombokexample.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Objects;
 
 //@ToString
 @ToString(onlyExplicitlyIncluded = true) // Llama a los incluidos explícitamente
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor // crea constructor con valores NonNull o final
 public class User {
     @Getter
     @Setter
@@ -19,16 +19,28 @@ public class User {
     @Getter
     @Setter
     @EqualsAndHashCode.Include
+    @NonNull
     private String username;
     @Getter
     @Setter
     @ToString.Exclude  // Excluye el parámetro de forma explícita
+    @NonNull
     private String password;
     @Getter
     @Setter
     private String role;
 
     /*
+    public User() {
+    }
+
+    public User(Integer id, String username, String password, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +

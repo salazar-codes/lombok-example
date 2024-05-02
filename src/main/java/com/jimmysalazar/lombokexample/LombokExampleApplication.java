@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class LombokExampleApplication {
@@ -21,7 +22,24 @@ public class LombokExampleApplication {
 
 		//toStringExample();
 		//equalsAndHashCodeExample();
-		equalsAndHashCodeWithSuperExample();
+		//equalsAndHashCodeWithSuperExample();
+		//constructorExample();
+		dataExample();
+	}
+
+	public static void dataExample() {
+		Rol rol = new Rol(12);
+		rol.setName("ADMIN");
+		rol.setCreateTs(LocalDateTime.now());
+
+		log.info("Rol name {}",rol.getName());
+		log.info("Rol hashcode {}",rol.hashCode());
+		log.info("Rol full info {}",rol.toString());
+	}
+
+	private static void constructorExample() {
+		User user = new User(10,"hey","qfue","");
+		User user2 = new User();
 	}
 
 	public static void nonNull() {
