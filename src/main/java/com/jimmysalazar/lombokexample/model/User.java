@@ -2,8 +2,6 @@ package com.jimmysalazar.lombokexample.model;
 
 import lombok.*;
 
-import java.util.Objects;
-
 //@ToString
 @ToString(onlyExplicitlyIncluded = true) // Llama a los incluidos explícitamente
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

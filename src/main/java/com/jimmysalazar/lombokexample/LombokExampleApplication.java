@@ -4,6 +4,7 @@ import com.jimmysalazar.lombokexample.file.FileManager;
 import com.jimmysalazar.lombokexample.model.*;
 import com.jimmysalazar.lombokexample.service.ConfigService;
 import com.jimmysalazar.lombokexample.service.FileManagerService;
+import com.jimmysalazar.lombokexample.service.spring.HelloService;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -22,18 +24,10 @@ public class LombokExampleApplication {
 	//private static final Logger log = LoggerFactory.getLogger(LombokExampleApplication.class);
 
 	public static void main(String[] args){
-		SpringApplication.run(LombokExampleApplication.class, args);
-
-		//toStringExample();
-		//equalsAndHashCodeExample();
-		//equalsAndHashCodeWithSuperExample();
-		//constructorExample();
-		//dataExample();
-		//valueExample();
-		//builderExample();
-		//sneakyThrowsExample();
-		//withExample();
-		getLazyExample();
+		//SpringApplication.run(LombokExampleApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(LombokExampleApplication.class, args);
+		HelloService bean = context.getBean(HelloService.class);
+		bean.sayHello();
 	}
 
 	private static void getLazyExample() {
