@@ -1,5 +1,6 @@
 package com.jimmysalazar.lombokexample;
 
+import com.jimmysalazar.lombokexample.model.Person;
 import com.jimmysalazar.lombokexample.model.TwitterAccount;
 import com.jimmysalazar.lombokexample.service.FileManager;
 import lombok.Cleanup;
@@ -59,5 +60,15 @@ public class LombokExampleApplication {
 		@Cleanup("releaseResources")
 		FileManager writer = new FileManager();
 		writer.write("Good morning!","example.txt");
+	}
+
+	public static void getterAndSetterExample() {
+		Person p = new Person();
+		p.setAlive(true);
+		p.setName("Jimmy");
+		p.setLastname("Salazar");
+		p.foo();
+
+		log.info("Name {} lastname {} isAlive {}",p.getName(), p.getLastname(), p.isAlive());
 	}
 }
