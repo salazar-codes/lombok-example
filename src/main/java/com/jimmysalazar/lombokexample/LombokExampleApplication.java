@@ -2,6 +2,7 @@ package com.jimmysalazar.lombokexample;
 
 import com.jimmysalazar.lombokexample.file.FileManager;
 import com.jimmysalazar.lombokexample.model.*;
+import com.jimmysalazar.lombokexample.service.ConfigService;
 import com.jimmysalazar.lombokexample.service.FileManagerService;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,14 @@ public class LombokExampleApplication {
 		//valueExample();
 		//builderExample();
 		//sneakyThrowsExample();
-		withExample();
+		//withExample();
+		getLazyExample();
+	}
+
+	private static void getLazyExample() {
+		ConfigService service = new ConfigService();
+		String config = service.getConfiguration();
+		log.info("Config {}",config);
 	}
 
 	private static void withExample() {
