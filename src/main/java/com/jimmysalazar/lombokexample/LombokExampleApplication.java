@@ -1,9 +1,8 @@
 package com.jimmysalazar.lombokexample;
 
-import com.jimmysalazar.lombokexample.model.Person;
-import com.jimmysalazar.lombokexample.model.TwitterAccount;
-import com.jimmysalazar.lombokexample.model.User;
-import com.jimmysalazar.lombokexample.service.FileManager;
+import com.jimmysalazar.lombokexample.file.FileManager;
+import com.jimmysalazar.lombokexample.model.*;
+import com.jimmysalazar.lombokexample.service.FileManagerService;
 import lombok.Cleanup;
 import lombok.val;
 import org.slf4j.Logger;
@@ -12,17 +11,65 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class LombokExampleApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(LombokExampleApplication.class);
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		SpringApplication.run(LombokExampleApplication.class, args);
 
 		//toStringExample();
+		//equalsAndHashCodeExample();
+		//equalsAndHashCodeWithSuperExample();
+		//constructorExample();
+		//dataExample();
+		//valueExample();
+		//builderExample();
+		sneakyThrowsExample();
+	}
 
+	private static void sneakyThrowsExample(){
+		FileManager.createFiles("src/main/resources/test1.properties", "src/main/resources/test2.properties");
+	}
+
+	private static void builderExample() {
+		// Employee em = new Employee(12,"salazar","jimmy",12.40f, Arrays.asList("méxico"),EmployeeType.EMPLOYEE);
+		Employee em = Employee.builder()
+				.id(10)
+				.name("Jimmy")
+				.lastName("Salazar")
+				.salary(25.50f)
+				.address("Peru")
+				.address("Chile")
+				//.addresses(Arrays.asList("Perú","Chile"))
+				//.employeeType(EmployeeType.EMPLOYEE)
+				.build();
+
+		log.info(em.toString());
+	}
+
+	public static void valueExample() {
+		// Value aparte de permite crear objetos inicializados, los crea de forma final. Inmutable
+		Permission permission = new Permission(10,"create",LocalDateTime.now());
+		log.info("Permission {}", permission.toString());
+	}
+
+	public static void dataExample() {
+		Rol rol = new Rol(12);
+		rol.setName("ADMIN");
+		rol.setCreateTs(LocalDateTime.now());
+
+		log.info("Rol name {}",rol.getName());
+		log.info("Rol hashcode {}",rol.hashCode());
+		log.info("Rol full info {}",rol.toString());
+	}
+
+	private static void constructorExample() {
+		User user = new User(10,"hey","qfue","");
+		User user2 = new User();
 	}
 
 	public static void nonNull() {
@@ -60,7 +107,7 @@ public class LombokExampleApplication {
 		//Con Lombok
 		//@Cleanup
 		@Cleanup("releaseResources")
-		FileManager writer = new FileManager();
+		FileManagerService writer = new FileManagerService();
 		writer.write("Good morning!","example.txt");
 	}
 
@@ -82,5 +129,42 @@ public class LombokExampleApplication {
 		u.setPassword("1al6");
 
 		log.info("User {}", u.toString());
+	}
+
+	public static void equalsAndHashCodeExample() {
+		User u = new User();
+		u.setId(2);
+		u.setUsername("eldev");
+		u.setRole("admin");
+		u.setPassword("1al6s");
+
+		User u2 = new User();
+		u2.setId(2);
+		u2.setUsername("eldev");
+		u2.setRole("admin");
+		u2.setPassword("1al6");
+
+		// Todos los campos deben ser iguales
+		log.info("Equals {}", u.equals(u2));
+	}
+
+	public static void equalsAndHashCodeWithSuperExample() {
+		UserEmployee u = new UserEmployee();
+		u.setId(2);
+		u.setUsername("eldev");
+		u.setRole("admin");
+		u.setPassword("1al6s");
+		u.setEmployeeId(123);
+		u.setType(EmployeeType.VENDOR);
+
+		UserEmployee u2 = new UserEmployee();
+		u2.setId(2);
+		u2.setUsername("eldev");
+		u2.setRole("customer");
+		u2.setPassword("12345");
+		u2.setEmployeeId(123);
+		u.setType(EmployeeType.EMPLOYEE);
+
+		log.info("Equals {}", u.equals(u2));
 	}
 }
