@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @SpringBootApplication
 public class LombokExampleApplication {
@@ -26,7 +27,21 @@ public class LombokExampleApplication {
 		//constructorExample();
 		//dataExample();
 		//valueExample();
+		builderExample();
+	}
 
+	private static void builderExample() {
+		// Employee em = new Employee(12,"salazar","jimmy",12.40f, Arrays.asList("méxico"),EmployeeType.EMPLOYEE);
+		Employee em = Employee.builder()
+				.id(10)
+				.name("Jimmy")
+				.lastName("Salazar")
+				.salary(25.50f)
+				.addresses(Arrays.asList("Perú"))
+				.employeeType(EmployeeType.EMPLOYEE)
+				.build();
+
+		log.info(em.toString());
 	}
 
 	public static void valueExample() {
