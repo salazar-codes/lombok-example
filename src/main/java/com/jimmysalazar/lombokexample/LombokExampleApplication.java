@@ -32,8 +32,8 @@ public class LombokExampleApplication {
 		//valueExample();
 		//builderExample();
 		//sneakyThrowsExample();
-		//withExample();
-		getLazyExample();
+		withExample();
+		//getLazyExample();
 	}
 
 	private static void getLazyExample() {
