@@ -2,8 +2,10 @@ package com.jimmysalazar.lombokexample;
 
 import com.jimmysalazar.lombokexample.file.FileManager;
 import com.jimmysalazar.lombokexample.model.*;
+import com.jimmysalazar.lombokexample.service.ConfigService;
 import com.jimmysalazar.lombokexample.service.FileManagerService;
 import lombok.Cleanup;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +16,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 @SpringBootApplication
+@Slf4j
 public class LombokExampleApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(LombokExampleApplication.class);
+	//private static final Logger log = LoggerFactory.getLogger(LombokExampleApplication.class);
 
 	public static void main(String[] args){
 		SpringApplication.run(LombokExampleApplication.class, args);
@@ -28,7 +31,25 @@ public class LombokExampleApplication {
 		//dataExample();
 		//valueExample();
 		//builderExample();
-		sneakyThrowsExample();
+		//sneakyThrowsExample();
+		//withExample();
+		getLazyExample();
+	}
+
+	private static void getLazyExample() {
+		ConfigService service = new ConfigService();
+		String config = service.getConfiguration();
+		log.info("Config {}",config);
+	}
+
+	private static void withExample() {
+		Point p = new Point(10.0f, 20.0f);
+		Point p2 = p
+				.withY(50.0f) // Clona el objeto solo cambiando el valor del with
+				.withX(14.5f);
+
+		log.info("Info point {}",p);
+		log.info("Info point 2 {}",p2);
 	}
 
 	private static void sneakyThrowsExample(){
