@@ -2,6 +2,7 @@ package com.jimmysalazar.lombokexample;
 
 import com.jimmysalazar.lombokexample.model.Person;
 import com.jimmysalazar.lombokexample.model.TwitterAccount;
+import com.jimmysalazar.lombokexample.model.User;
 import com.jimmysalazar.lombokexample.service.FileManager;
 import lombok.Cleanup;
 import lombok.val;
@@ -20,6 +21,7 @@ public class LombokExampleApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LombokExampleApplication.class, args);
 
+		//toStringExample();
 
 	}
 
@@ -70,5 +72,15 @@ public class LombokExampleApplication {
 		p.foo();
 
 		log.info("Name {} lastname {} isAlive {}",p.getName(), p.getLastname(), p.isAlive());
+	}
+
+	public static void toStringExample() {
+		User u = new User();
+		u.setId(2);
+		u.setUsername("eldev");
+		u.setRole("admin");
+		u.setPassword("1al6");
+
+		log.info("User {}", u.toString());
 	}
 }
