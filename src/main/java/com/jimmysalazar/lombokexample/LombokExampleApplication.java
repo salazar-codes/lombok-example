@@ -24,7 +24,15 @@ public class LombokExampleApplication {
 		//equalsAndHashCodeExample();
 		//equalsAndHashCodeWithSuperExample();
 		//constructorExample();
-		dataExample();
+		//dataExample();
+		//valueExample();
+
+	}
+
+	public static void valueExample() {
+		// Value aparte de permite crear objetos inicializados, los crea de forma final. Inmutable
+		Permission permission = new Permission(10,"create",LocalDateTime.now());
+		log.info("Permission {}", permission.toString());
 	}
 
 	public static void dataExample() {
