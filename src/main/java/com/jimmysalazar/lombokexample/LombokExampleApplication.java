@@ -1,8 +1,6 @@
 package com.jimmysalazar.lombokexample;
 
-import com.jimmysalazar.lombokexample.model.Person;
-import com.jimmysalazar.lombokexample.model.TwitterAccount;
-import com.jimmysalazar.lombokexample.model.User;
+import com.jimmysalazar.lombokexample.model.*;
 import com.jimmysalazar.lombokexample.service.FileManager;
 import lombok.Cleanup;
 import lombok.val;
@@ -22,7 +20,8 @@ public class LombokExampleApplication {
 		SpringApplication.run(LombokExampleApplication.class, args);
 
 		//toStringExample();
-
+		//equalsAndHashCodeExample();
+		equalsAndHashCodeWithSuperExample();
 	}
 
 	public static void nonNull() {
@@ -82,5 +81,42 @@ public class LombokExampleApplication {
 		u.setPassword("1al6");
 
 		log.info("User {}", u.toString());
+	}
+
+	public static void equalsAndHashCodeExample() {
+		User u = new User();
+		u.setId(2);
+		u.setUsername("eldev");
+		u.setRole("admin");
+		u.setPassword("1al6s");
+
+		User u2 = new User();
+		u2.setId(2);
+		u2.setUsername("eldev");
+		u2.setRole("admin");
+		u2.setPassword("1al6");
+
+		// Todos los campos deben ser iguales
+		log.info("Equals {}", u.equals(u2));
+	}
+
+	public static void equalsAndHashCodeWithSuperExample() {
+		UserEmployee u = new UserEmployee();
+		u.setId(2);
+		u.setUsername("eldev");
+		u.setRole("admin");
+		u.setPassword("1al6s");
+		u.setEmployeeId(123);
+		u.setType(EmployeeType.VENDOR);
+
+		UserEmployee u2 = new UserEmployee();
+		u2.setId(2);
+		u2.setUsername("eldev");
+		u2.setRole("customer");
+		u2.setPassword("12345");
+		u2.setEmployeeId(123);
+		u.setType(EmployeeType.EMPLOYEE);
+
+		log.info("Equals {}", u.equals(u2));
 	}
 }
