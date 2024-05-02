@@ -1,7 +1,8 @@
 package com.jimmysalazar.lombokexample;
 
+import com.jimmysalazar.lombokexample.file.FileManager;
 import com.jimmysalazar.lombokexample.model.*;
-import com.jimmysalazar.lombokexample.service.FileManager;
+import com.jimmysalazar.lombokexample.service.FileManagerService;
 import lombok.Cleanup;
 import lombok.val;
 import org.slf4j.Logger;
@@ -11,14 +12,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 @SpringBootApplication
 public class LombokExampleApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(LombokExampleApplication.class);
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		SpringApplication.run(LombokExampleApplication.class, args);
 
 		//toStringExample();
@@ -27,7 +27,12 @@ public class LombokExampleApplication {
 		//constructorExample();
 		//dataExample();
 		//valueExample();
-		builderExample();
+		//builderExample();
+		sneakyThrowsExample();
+	}
+
+	private static void sneakyThrowsExample(){
+		FileManager.createFiles("src/main/resources/test1.properties", "src/main/resources/test2.properties");
 	}
 
 	private static void builderExample() {
@@ -102,7 +107,7 @@ public class LombokExampleApplication {
 		//Con Lombok
 		//@Cleanup
 		@Cleanup("releaseResources")
-		FileManager writer = new FileManager();
+		FileManagerService writer = new FileManagerService();
 		writer.write("Good morning!","example.txt");
 	}
 
