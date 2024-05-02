@@ -3,6 +3,7 @@ package com.jimmysalazar.lombokexample.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Singular;
 
 import java.util.List;
 
@@ -15,7 +16,9 @@ public class Employee {
     private String name;
     private float salary;
 
+    @Singular // Allows to add addresses one by one
     private List<String> addresses;
 
-    private EmployeeType employeeType;
+    @Builder.Default // Valor por defecto que puede no incluirse en el Builder
+    private EmployeeType employeeType = EmployeeType.VENDOR;
 }

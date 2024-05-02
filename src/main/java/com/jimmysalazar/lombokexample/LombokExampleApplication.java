@@ -37,8 +37,10 @@ public class LombokExampleApplication {
 				.name("Jimmy")
 				.lastName("Salazar")
 				.salary(25.50f)
-				.addresses(Arrays.asList("Perú"))
-				.employeeType(EmployeeType.EMPLOYEE)
+				.address("Peru")
+				.address("Chile")
+				//.addresses(Arrays.asList("Perú","Chile"))
+				//.employeeType(EmployeeType.EMPLOYEE)
 				.build();
 
 		log.info(em.toString());
